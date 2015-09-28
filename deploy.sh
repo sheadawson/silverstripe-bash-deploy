@@ -100,8 +100,6 @@ if [ ! -f ${TARGET_DIR}_ss_environment.php ]; then
 	printf "\n${GREEN}\$ cp ${CONFIG_DIR}_ss_environment.php.default ${TARGET_DIR}_ss_environment.php ${NC}\n"
 	cp ${CONFIG_DIR}"_ss_environment.php.default" ${TARGET_DIR}"_ss_environment.php"
 	
-	# set _ss_environment variables if set in config
-	
 	function sedeasy {
 	  sed -i -e "s/$(echo $1 | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/$(echo $2 | sed -e 's/[\/&]/\\&/g')/g" $3
 	}
@@ -126,6 +124,8 @@ if [ ! -f ${TARGET_DIR}_ss_environment.php ]; then
 		sedeasy "{URL}" "$URL" ${TARGET_DIR}"_ss_environment.php"	
 	fi
 fi
+
+# run dev/build
 	
 printf "\n${YELLOW}Running dev/build${NC}\n"
 printf "\n${GREEN}\$ $PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/build flush=all ${NC}\n"
