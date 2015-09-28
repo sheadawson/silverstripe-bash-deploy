@@ -20,7 +20,7 @@ RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htac
 
 if [ ! $# -eq 2 ]; then
 	printf "\n${RED}Error: please provide site and environment/branch argument eg. site.com production${NC}\n"
-    exit 1
+	exit 1
 fi
 
 CONFIG=${CONFIG_DIR}${1}"-"${2}
@@ -93,7 +93,7 @@ printf "\n${YELLOW}syncing $TMP_DIR to $TARGET_DIR ${NC}\n"
 printf "\n${GREEN}\$ rsync -rltgoDzvO $TMP_DIR $TARGET_DIR $RSYNC_EXCLUDE --delete-after ${NC}\n"
 rsync -rltgoDzvO $TMP_DIR $TARGET_DIR $RSYNC_EXCLUDE --delete-after 
 
-# devbuild
+# create and configure _ss_environment.php if it doesn't exist yet
 
 if [ ! -f ${TARGET_DIR}_ss_environment.php ]; then
 	printf "\n${YELLOW}No _ss_environment.php file found, creating ${TARGET_DIR}_ss_environment.php from template. Please configure it with your database connection details then run dev/build${NC}\n"
