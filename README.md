@@ -52,10 +52,10 @@ TMP_DIR="$HOME/deploy/sites/mywebsite/"
 TARGET_DIR="$HOME/public_html/"
 
 # Do you want to automatically set up your _ss_environment.php file?
-SS_DATABASE_NAME="kaikoura_uat"
-SS_DATABASE_USERNAME="kaikoura_user"
-SS_DATABASE_PASSWORD="EB*M{@G9X]Ok"
-URL="http://uat.kaikouratrack.co.nz"
+SS_DATABASE_NAME="mydatabasename"
+SS_DATABASE_USERNAME="mydatabaseuser"
+SS_DATABASE_PASSWORD="xxxxxxxxxxx"
+URL="http://mywebsite.com"
 
 # You may also need to configure any of these defaults
 PHP_EXEC="php"
