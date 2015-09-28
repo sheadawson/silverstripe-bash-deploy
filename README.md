@@ -70,4 +70,8 @@ RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htac
 $ deploy nameofsite branch
 ```
 
+## Caution
+
+When rsync runs it will delete files/folders in your TARGET_DIR that are not in the TMP_DIR. Make sure you exclude any files you want to keep in the RSYNC_EXCLUDE configuration.
+
 
