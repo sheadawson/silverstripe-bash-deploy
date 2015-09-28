@@ -1,8 +1,7 @@
 #!/bin/bash
 
-composer;
+set -e
 
-exit;
 # Gimme some color!
 
 NC="\033[0m"   
@@ -12,9 +11,9 @@ GREEN="\033[0;32m"
  
 # Set default environment variables
 
-CONFIG_DIR="~/deploy/config/"
-PHP_EXEC="/usr/bin/php-cli"
-COMPOSER_EXEC="$PHP_EXEC /usr/local/bin/composer.phar"
+CONFIG_DIR="$HOME/deploy/config/"
+PHP_EXEC="php"
+COMPOSER_EXEC="composer.phar"
 RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htaccess --exclude=/composer.* --exclude=.git --exclude=/uat"
 
 # check for valid request
@@ -29,7 +28,7 @@ CONFIG=${CONFIG_DIR}${1}"-"${2}
 printf $CONFIG
 
 if [ ! -f $CONFIG ]; then
-	printf "\n${RED}Error: no configuration found for site: $1 branch $2 ${NC}\n"
+	printf "\n${RED}Error: no configuration found for site: $1 branch: $2 ${NC}\n"
 	exit 1
 fi
 
@@ -100,9 +99,34 @@ if [ ! -f ${TARGET_DIR}_ss_environment.php ]; then
 	printf "\n${YELLOW}No _ss_environment.php file found, creating ${TARGET_DIR}_ss_environment.php from template. Please configure it with your database connection details then run dev/build${NC}\n"
 	printf "\n${GREEN}\$ cp ${CONFIG_DIR}_ss_environment.php.default ${TARGET_DIR}_ss_environment.php ${NC}\n"
 	cp ${CONFIG_DIR}"_ss_environment.php.default" ${TARGET_DIR}"_ss_environment.php"
-	#todo - prompt for environment config details
-else
-	printf "\n${YELLOW}Running dev/build${NC}\n"
-	printf "\n${GREEN}\$ $PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/build flush=all ${NC}\n"
-	$PHP_EXEC ${TARGET_DIR}"framework/cli-script.php dev/build flush=all"
+	
+	# set _ss_environment variables if set in config
+	
+	function sedeasy {
+	  sed -i -e "s/$(echo $1 | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/$(echo $2 | sed -e 's/[\/&]/\\&/g')/g" $3
+	}
+	
+	if [ ! -f $SS_DATABASE_NAME ]; then	
+		printf "\n${YELLOW}Setting SS_DATABASE_NAME from config ${NC}\n"
+		sedeasy "{SS_DATABASE_NAME}" "$SS_DATABASE_NAME" ${TARGET_DIR}"_ss_environment.php"	
+	fi
+	
+	if [ ! -f $SS_DATABASE_USERNAME ]; then	
+		printf "\n${YELLOW}Setting SS_DATABASE_USERNAME from config ${NC}\n"
+		sedeasy "{SS_DATABASE_USERNAME}" "$SS_DATABASE_USERNAME" ${TARGET_DIR}"_ss_environment.php"	
+	fi
+	
+	if [ ! -f $SS_DATABASE_PASSWORD ]; then	
+		printf "\n${YELLOW}Setting SS_DATABASE_PASSWORD from config ${NC}\n"
+		sedeasy "{SS_DATABASE_PASSWORD}" "$SS_DATABASE_PASSWORD" ${TARGET_DIR}"_ss_environment.php"	
+	fi
+	
+	if [ ! -f $SS_DATABASE_PASSWORD ]; then	
+		printf "\n${YELLOW}Setting _FILE_TO_URL_MAPPING from config ${NC}\n"
+		sedeasy "{URL}" "$URL" ${TARGET_DIR}"_ss_environment.php"	
+	fi
 fi
+	
+printf "\n${YELLOW}Running dev/build${NC}\n"
+printf "\n${GREEN}\$ $PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/build flush=all ${NC}\n"
+eval "$PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/build flush=all"

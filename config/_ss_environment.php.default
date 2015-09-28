@@ -2,9 +2,9 @@
 define('SS_ENVIRONMENT_TYPE', 'dev');
 define('SS_DATABASE_CLASS', 'MySQLDatabase');
 define('SS_DATABASE_SERVER', 'localhost');
-define('SS_DATABASE_NAME', '');
-define('SS_DATABASE_USERNAME', '');
-define('SS_DATABASE_PASSWORD', '');
+define('SS_DATABASE_NAME', '{SS_DATABASE_NAME}');
+define('SS_DATABASE_USERNAME', '{SS_DATABASE_USERNAME}');
+define('SS_DATABASE_PASSWORD', '{SS_DATABASE_PASSWORD}');
 //define('SS_DEFAULT_ADMIN_USERNAME', 'admin');
 //define('SS_DEFAULT_ADMIN_PASSWORD', 'admin');
 define('SS_USE_BASIC_AUTH', false);
@@ -16,4 +16,4 @@ define('SS_ERROR_LOG', 'app/silverstripe.log');
 //define('SS_DATABASE_TIMEZONE', '');
 
 global $_FILE_TO_URL_MAPPING; 
-$_FILE_TO_URL_MAPPING[__DIR__] = '$url';
+$_FILE_TO_URL_MAPPING[__DIR__] = '{URL}';
