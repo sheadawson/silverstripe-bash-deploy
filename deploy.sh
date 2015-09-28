@@ -1,5 +1,8 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
+composer;
+
+exit;
 # Gimme some color!
 
 NC="\033[0m"   
@@ -9,10 +12,10 @@ GREEN="\033[0;32m"
  
 # Set default variables
 
-CONFIG_DIR="/home/livesour/deploy/config/"
-PHP_EXEC="/usr/local/php55/bin/php-cli"
-COMPOSER_EXEC="$PHP_EXEC /home/livesour/composer.phar"
-RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htaccess --exclude=/composer.* --exclude=.git"
+CONFIG_DIR="~/deploy/config/"
+PHP_EXEC="/usr/bin/php-cli"
+COMPOSER_EXEC="$PHP_EXEC /usr/local/bin/composer.phar"
+RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htaccess --exclude=/composer.* --exclude=.git --exclude=/uat"
 
 # check for valid request
 
