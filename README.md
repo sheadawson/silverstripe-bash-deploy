@@ -43,7 +43,7 @@ alias deploy='~/deploy/deploy.sh'
 ```
 # What are we deploying?
 REPO="git@github.com:me/myrepo.git"
-BRANCH="uat"
+BRANCH="production"
 
 # Where are we pulling/cloning into? 
 TMP_DIR="$HOME/deploy/sites/mywebsite/"
