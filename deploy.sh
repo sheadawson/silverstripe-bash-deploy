@@ -130,3 +130,9 @@ fi
 printf "\n${YELLOW}Running dev/build${NC}\n"
 printf "\n${GREEN}\$ $PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/build flush=all ${NC}\n"
 eval "$PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/build flush=all"
+
+# clear dynamic cache
+
+printf "\n${YELLOW}Clearing dynamic cache${NC}\n"
+printf "\n${GREEN}\$ $PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/tasks/ClearDynamicCacheTask ${NC}\n"
+eval "$PHP_EXEC ${TARGET_DIR}framework/cli-script.php dev/tasks/ClearDynamicCacheTask"
