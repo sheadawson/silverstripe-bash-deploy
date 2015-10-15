@@ -1,0 +1,10 @@
+REPO="git@gitlab.com:xxx/xxx.git"
+TARGET_DIR="$HOME/public_html/"
+TMP_DIR="$HOME/deploy/sites/xxx/"
+BRANCH="master"
+RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htaccess --exclude=/composer.* --exclude=.git --exclude=/themes/default/combined --exclude=*.log"
+
+SS_DATABASE_NAME="xxx"
+SS_DATABASE_USERNAME="xxx"
+SS_DATABASE_PASSWORD="xxx"
+URL="http://xxx.com"

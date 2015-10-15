@@ -18,23 +18,21 @@ RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htac
 
 # check for valid request
 
-if [ ! $# -eq 2 ]; then
-	printf "\n${RED}Error: please provide site and environment/branch argument eg. site.com production${NC}\n"
+if [ ! $# -eq 1 ]; then
+	printf "\n${RED}Error: please provide config file name as an argument${NC}\n"
 	exit 1
 fi
 
-CONFIG=${CONFIG_DIR}${1}"-"${2}
-
-printf $CONFIG
+CONFIG=${CONFIG_DIR}${1}
 
 if [ ! -f $CONFIG ]; then
-	printf "\n${RED}Error: no configuration found for site: $1 branch: $2 ${NC}\n"
+	printf "\n${RED}Error: no configuration found in $CONFIG ${NC}\n"
 	exit 1
 fi
 
 # load configuration file
 
-printf "\n${YELLOW}Loading config for $1 $2 ${NC}\n"
+printf "\n${YELLOW}Loading config for $1 ${NC}\n"
 source $CONFIG
 
 # make sure TMP_DIR exists

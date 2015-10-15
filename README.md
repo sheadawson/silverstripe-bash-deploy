@@ -6,7 +6,7 @@ Bash deployment script for SilverStripe. It's pretty simple and fast and suits m
 
 * This script should be installed on the same server running your website
 * You create config files for your deployable sites/branches
-* You run command: $ deploy nameofsite branch
+* You run command: $ deploy nameofconfigfile
 * Repository is cloned/updated in temporary directory
 * Composer installs dependencies
 * Rsync syncs files with target directory
@@ -35,9 +35,9 @@ alias deploy='~/deploy/deploy.sh'
 
 ## Configuration
 
-* Create a configuration file for each site/branch you are deploying on the server. The config files should be stored in and named in the format 
+* Create a configuration file for each site you are deploying on the server. You can use config/site.default as a template
 ```
-~/deploy/config/nameofsite-branch
+~/deploy/config/nameofsite
 ```
 
 ```
