@@ -14,10 +14,10 @@ Copy the deploy-local.sh file to wherever you want to run deployments from, prob
 
 Now run that file with the configure option. This will install the deployment scripts on the server and prompt you to enter details about the project you are deploying like repo url, database connection details, project folder etc.
 
-  $ ./deploy.sh configure
+```$ ./deploy.sh configure```
 
 ## Usage
 
 Once you have configured your environment. You can run 
 
-  $ ./deploy.sh nameofconfigfile
+```$ ./deploy.sh nameofconfigfile```
