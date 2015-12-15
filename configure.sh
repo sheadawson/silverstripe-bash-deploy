@@ -50,5 +50,5 @@ echo -e "URL=\"$URL\"" >> $FILE
 echo -e "PHP_EXEC=\"$PHP_EXEC\"" >> $FILE
 echo -e "COMPOSER_EXEC=\"$COMPOSER_EXEC\"" >> $FILE
 
-echo "Your config file has been created at $FILE"
+echo "Your config file has been created at $FILE. You can now run deploy.sh $CONFIG_FILE_IDENTIFIER"
 cat $FILE
