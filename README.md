@@ -1,77 +1,18 @@
-# silverstripe-bash-deploy
+# silverstripe-bash-deploy (WIP)
 
-Bash deployment script for SilverStripe. It's pretty simple and fast and suits me. Let me know if it's useful for you or if you have any suggestions to help improve it!
-
-## How does it work, like what does it do?
-
-* This script should be installed on the same server running your website
-* You create config files for your deployable sites/branches
-* You run command: $ deploy nameofconfigfile
-* Repository is cloned/updated in temporary directory
-* Composer installs dependencies
-* Rsync syncs files with target directory
-* _ss_environment.php file created/configured if needed
-* dev/build run
+A simple Bash deployment script for a specific hosting scenario - shared host that has git installed but not much else.
 
 ## Server Requirements
 
 * git 
-* composer
-* rsync 
 * ssh access
 * port 22 open
 
 ## Installation
 
-* Copy this repository into the ~/deploy directory on your website server
-```
-git clone git@github.com:sheadawson/silverstripe-bash-deploy.git ~/deploy
-```
+...
 
-* Create a nice alias to execute the shell script eg.
-```
-alias deploy='~/deploy/deploy.sh'
-```
-
-## Configuration
-
-* Create a configuration file for each site you are deploying on the server. You can use config/site.default as a template
-```
-~/deploy/config/nameofsite
-```
-
-```
-# What are we deploying?
-REPO="git@github.com:me/myrepo.git"
-BRANCH="production"
-
-# Where are we pulling/cloning into? 
-TMP_DIR="$HOME/deploy/sites/mywebsite/"
-
-# Where are we deploying the files to?
-TARGET_DIR="$HOME/public_html/"
-
-# Do you want to automatically set up your _ss_environment.php file?
-SS_DATABASE_NAME="mydatabasename"
-SS_DATABASE_USERNAME="mydatabaseuser"
-SS_DATABASE_PASSWORD="xxxxxxxxxxx"
-URL="http://mywebsite.com"
-
-# You may also need to configure any of these defaults
-PHP_EXEC="php"
-COMPOSER_EXEC="composer.phar"
-RSYNC_EXCLUDE="--exclude=/assets --exclude=/_ss_environment.php --exclude=/.htaccess --exclude=/composer.* --exclude=.git"
-```
 
 ## Usage
 
-* SSH into your server
-```
-$ deploy nameofsite branch
-```
-
-## Caution
-
-When rsync runs it will delete files/folders in your TARGET_DIR that are not in the TMP_DIR. Make sure you exclude any files you want to keep in the RSYNC_EXCLUDE configuration.
-
-
+...
