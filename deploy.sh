@@ -43,6 +43,9 @@ if [ ! -d "$PROJECT_DIR" ]; then
 	printf "\n${YELLOW}Cloning project into $PROJECT_DIR ${NC}\n"
 	printf "\n${GREEN}\$ git clone $REPO $PROJECT_DIR ${NC}\n"
 	git clone $REPO $PROJECT_DIR
+elif [ ! -d "${PROJECT_DIR}.git" ]; then
+	printf "\n${RED} Uh oh... The project directory $PROJECT_DIR exists already and is not a git repository. You probably want to remove it. \n"
+	exit
 fi
 
 printf "\n${GREEN}\$ cd $PROJECT_DIR ${NC}\n"
@@ -124,5 +127,3 @@ eval "$PHP_EXEC framework/cli-script.php dev/build flush=all"
 printf "\n${YELLOW}Clearing dynamic cache${NC}\n"
 printf "\n${GREEN}\$ $PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask ${NC}\n"
 eval "$PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask"
-
-	
