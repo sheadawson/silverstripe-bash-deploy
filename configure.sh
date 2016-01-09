@@ -52,3 +52,5 @@ echo -e "COMPOSER_EXEC=\"$COMPOSER_EXEC\"" >> $FILE
 
 echo "Your config file has been created at $FILE. You can now run deploy.sh $CONFIG_FILE_IDENTIFIER"
 cat $FILE
+
+exit
