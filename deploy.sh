@@ -81,7 +81,7 @@ fi
 
 printf "\n${YELLOW}Installing dependencies${NC}\n"
 printf "\n${GREEN}\$ $COMPOSER_EXEC --no-interaction install ${NC}\n"
-eval "$COMPOSER_EXEC --no-interaction install"
+eval "$COMPOSER_EXEC install --no-interaction --no-dev"
 
 # create and configure _ss_environment.php if it doesn't exist yet
 
