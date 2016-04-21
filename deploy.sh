@@ -115,7 +115,15 @@ if [ ! -f ${PROJECT_DIR}_ss_environment.php ]; then
 	fi
 fi
 
-	
+
+# clear silverstripe-cache
+
+printf "\n${YELLOW}Clearing silverstripe-cache {NC}\n"
+if [ -d ${PROJECT_DIR}silverstripe-cache ]; then
+        rm -rf ${PROJECT_DIR}silverstripe-cache
+fi
+mkdir ${PROJECT_DIR}silverstripe-cache
+
 # run dev/build
 
 printf "\n${YELLOW}Running dev/build${NC}\n"
@@ -124,6 +132,8 @@ eval "$PHP_EXEC framework/cli-script.php dev/build flush=all"
 
 # clear dynamic cache
 
-printf "\n${YELLOW}Clearing dynamic cache${NC}\n"
-printf "\n${GREEN}\$ $PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask ${NC}\n"
-eval "$PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask"
+if [ -d ${PROJECT_DIR}dynamiccache ]; then
+	printf "\n${YELLOW}Clearing dynamic cache${NC}\n"
+	printf "\n${GREEN}\$ $PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask ${NC}\n"
+	eval "$PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask"
+fi
