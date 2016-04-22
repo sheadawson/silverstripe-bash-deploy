@@ -137,3 +137,11 @@ if [ -d ${PROJECT_DIR}dynamiccache ]; then
 	printf "\n${GREEN}\$ $PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask ${NC}\n"
 	eval "$PHP_EXEC framework/cli-script.php dev/tasks/ClearDynamicCacheTask"
 fi
+
+# clear cache-include
+
+if [ -d ${PROJECT_DIR}silverstripe-cacheinclude ]; then
+        printf "\n${YELLOW}Clearing cache-include {NC}\n"
+        printf "\n${GREEN}\$ $PHP_EXEC framework/cli-script.php cache-include/clearall ${NC}\n"
+        eval "$PHP_EXEC framework/cli-script.php cache-include/clearall"
+fi
