@@ -1,10 +1,14 @@
-# silverstripe-bash-deploy (WIP)
+# silverstripe-bash-deploy
 
 A simple Bash deployment script for a specific hosting scenario - shared host that has git installed but not much else.
 
+## Requirements
+
+SilverStripe 3.x or 4.x
+
 ## Server Requirements
 
-* git 
+* git
 * ssh access
 * port 22 open
 
@@ -18,6 +22,6 @@ Now run that file with the configure option. This will install the deployment sc
 
 ## Usage
 
-Once you have configured your environment. You can run 
+Once you have configured your environment. You can run
 
 ```$ ./deploy.sh nameofconfigfile```
