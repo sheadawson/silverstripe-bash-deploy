@@ -83,12 +83,28 @@ printf "\n${YELLOW}Installing dependencies${NC}\n"
 printf "\n${GREEN}\$ $COMPOSER_EXEC --no-interaction install ${NC}\n"
 eval "$COMPOSER_EXEC install --no-interaction --no-dev"
 
+# get ss version
+
+if [[ -f ${PROJECT_DIR}framework/cli-script.php ]]; then
+    SSVERSION=3
+else
+    SSVERSION=4
+fi
+
+# get env file path
+
+if [[ $SSVERSION -eq 4 ]]; then
+    ENVFILE=".env"
+else
+    ENVFILE="_ss_environment.php"
+fi
+
 # create and configure _ss_environment.php if it doesn't exist yet
 
-if [ ! -f ${PROJECT_DIR}_ss_environment.php ]; then
-	printf "\n${YELLOW}No _ss_environment.php file found, creating ${PROJECT_DIR}_ss_environment.php from template. Please configure it with your database connection details then run dev/build${NC}\n"
-	printf "\n${GREEN}\$ cp ${DIR}_ss_environment.php.default ${PROJECT_DIR}_ss_environment.php ${NC}\n"
-	cp ${DIR}"_ss_environment.php.default" ${PROJECT_DIR}"_ss_environment.php"
+if [ ! -f "${PROJECT_DIR}$ENVFILE" ]; then
+	printf "\n${YELLOW}No $ENVFILE file found, creating ${PROJECT_DIR}$ENVFILE from template. Please configure it with your database connection details then run dev/build${NC}\n"
+	printf "\n${GREEN}\$ cp ${DIR}$ENVFILE.default ${PROJECT_DIR}$ENVFILE ${NC}\n"
+	cp ${DIR}$ENVFILE".default" ${PROJECT_DIR}$ENVFILE
 
 	function sedeasy {
 	  sed -i -e "s/$(echo $1 | sed -e 's/\([[\/.*]\|\]\)/\\&/g')/$(echo $2 | sed -e 's/[\/&]/\\&/g')/g" $3
@@ -96,22 +112,22 @@ if [ ! -f ${PROJECT_DIR}_ss_environment.php ]; then
 
 	if [ ! -f $SS_DATABASE_NAME ]; then
 		printf "\n${YELLOW}Setting SS_DATABASE_NAME from config ${NC}\n"
-		sedeasy "{SS_DATABASE_NAME}" "$SS_DATABASE_NAME" ${PROJECT_DIR}"_ss_environment.php"
+		sedeasy "{SS_DATABASE_NAME}" "$SS_DATABASE_NAME" ${PROJECT_DIR}$ENVFILE
 	fi
 
 	if [ ! -f $SS_DATABASE_USERNAME ]; then
 		printf "\n${YELLOW}Setting SS_DATABASE_USERNAME from config ${NC}\n"
-		sedeasy "{SS_DATABASE_USERNAME}" "$SS_DATABASE_USERNAME" ${PROJECT_DIR}"_ss_environment.php"
+		sedeasy "{SS_DATABASE_USERNAME}" "$SS_DATABASE_USERNAME" ${PROJECT_DIR}$ENVFILE
 	fi
 
 	if [ ! -f $SS_DATABASE_PASSWORD ]; then
 		printf "\n${YELLOW}Setting SS_DATABASE_PASSWORD from config ${NC}\n"
-		sedeasy "{SS_DATABASE_PASSWORD}" "$SS_DATABASE_PASSWORD" ${PROJECT_DIR}"_ss_environment.php"
+		sedeasy "{SS_DATABASE_PASSWORD}" "$SS_DATABASE_PASSWORD" ${PROJECT_DIR}$ENVFILE
 	fi
 
 	if [ ! -f $SS_DATABASE_PASSWORD ]; then
 		printf "\n${YELLOW}Setting _FILE_TO_URL_MAPPING from config ${NC}\n"
-		sedeasy "{URL}" "$URL" ${PROJECT_DIR}"_ss_environment.php"
+		sedeasy "{URL}" "$URL" ${PROJECT_DIR}$ENVFILE
 	fi
 fi
 
@@ -126,10 +142,10 @@ mkdir ${PROJECT_DIR}silverstripe-cache
 
 # get cli-script path
 
-if [[ -f ${PROJECT_DIR}framework/cli-script.php ]]; then
-    CLISCRIPT="${PROJECT_DIR}framework/cli-script.php"
-else
+if [[ $SSVERSION -eq 4 ]]; then
     CLISCRIPT="${PROJECT_DIR}vendor/silverstripe/framework/cli-script.php"
+else
+	CLISCRIPT="${PROJECT_DIR}framework/cli-script.php"
 fi
 
 
