@@ -11,6 +11,7 @@ SilverStripe 3.x or 4.x
 * git
 * ssh access
 * port 22 open
+* your servers public ssh key added to your repository deploy keys
 
 ## Installation
 
@@ -25,3 +26,8 @@ Now run that file with the configure option. This will install the deployment sc
 Once you have configured your environment. You can run
 
 ```$ ./deploy.sh nameofconfigfile```
+
+
+## Troubleshooting
+
+The first time you run a deployment, it needs to be run from the server ie. ssh in first, run deploy/deploy.sh. This will ensure you can add githum/gitlab/your git service of choice to the list of known hosts.
