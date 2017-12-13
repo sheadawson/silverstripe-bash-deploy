@@ -30,4 +30,4 @@ Once you have configured your environment. You can run
 
 ## Troubleshooting
 
-The first time you run a deployment, it needs to be run from the server ie. ssh in first, run deploy/deploy.sh. This will ensure you can add githum/gitlab/your git service of choice to the list of known hosts.
+The first time you run a deployment, it needs to be run from the server ie. ssh in first, run deploy/deploy.sh. This will ensure you can add github/gitlab/your git service of choice to the list of known hosts.
